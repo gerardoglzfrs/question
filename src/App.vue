@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-card
+      color="grey lighten-4"
+      flat
+      tile
+    >
+      <v-toolbar dense  color="light-blue lighten-6" dark>
+        <v-toolbar-title style="color: white;">Ortográfia y gramatíca</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+    </v-card>
+    
+    <v-main>
+      <Main/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Main from "./components/Main";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    Main
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>

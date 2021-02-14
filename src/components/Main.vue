@@ -78,7 +78,7 @@
                         <v-card flat>
                             <v-card-text>
                                 <v-row class="justify-center mt-6 mb-6">
-                                    <!-- Faltaaa-->
+                                    <!-- Faltaaass-->
                                 </v-row>
                             </v-card-text>
                         </v-card>

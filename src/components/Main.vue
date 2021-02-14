@@ -17,7 +17,7 @@
                         <span><v-icon>arrow_forward_ios</v-icon></span>
                     </v-tab>
                 </v-tabs>
-
+                <!-- Item1 -->
                 <v-tabs-items v-model="preg">
                     <v-tab-item value="open">
                         <v-card flat>
@@ -72,6 +72,7 @@
                         </v-card>
                     </v-tab-item>
                 </v-tabs-items>
+                <!-- Item2 -->
                 <v-tabs-items v-model="preg">
                     <v-tab-item value="close">
                         <v-card flat>

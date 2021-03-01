@@ -28,22 +28,29 @@
                                             <v-form  v-model="valid" ref="formQuestion">
                                                 <v-container>
                                                     <v-row>
+                                                        <v-col cols="12" md="12">
+                                                            <v-select v-model="select" :hint="`${select.topics}`" :items="items" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line >
+                                                            </v-select>
+                                                        </v-col>
                                                         <v-col cols="12" md="12" >
                                                             <v-text-field v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
                                                         </v-col>
                                                         <v-col cols="12" md="12" >
+                                                            <v-text-field v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
+                                                            <v-text-field v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
+                                                        </v-col>
+                                                        <v-col cols="12" md="12" >
                                                             <v-text-field v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
+                                                            <v-text-field v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                         </v-col>
                                                         <v-col cols="12" md="12" >
                                                             <v-text-field v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                            <v-text-field v-model="form.answer3" :rules="answerRules" label="Respuesta 3" required></v-text-field>
+                                                            <v-text-field v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                         </v-col>
                                                         <v-col cols="12" md="12" >
                                                         <v-row class="justify-center">
                                                             <v-row align="center" justify="space-around">
-                                                                <v-btn :disabled="!valid" @click="save(form)" tile color="success" >
+                                                                <v-btn :disabled="!valid" @click="save()" tile color="success" >
                                                                     <span>
                                                                         <v-icon left>
                                                                             save
@@ -90,6 +97,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
     export default {
         data:() => ({
             valid: true,
@@ -97,15 +106,28 @@
             jsonF: [],
             form: {
                 question: "",
+                correctAns: "",
+                dca: "",
                 answer1: "",
+                da1: "",
                 answer2: "",
-                answer3: "",
+                da2: ""
             },
             questionRules: [
                 v => !!v || 'La pregunta es requerida',
             ],
             answerRules: [
                 v => !!v || 'La respuesta es requerida',
+            ],
+            description: [
+                v => !!v || 'La descripción es requerida'
+            ],
+            
+            select: { topics: 'Ortografia' },
+            
+            items: [
+                { topics: 'Ortografia' },
+                { topics: 'Gramatica' }
             ],
         }),
 
@@ -116,12 +138,41 @@
         },
         
         methods: {
-            save() {
+           /*  save() {
                 const form = this.form;
                 var json = JSON.stringify(form);
                 this.jsonF = json;
                 console.log(json);
-            }
+            } */
+            
+            async save() {
+                try {
+                    const {data} = await this.$apollo.mutate({
+                        mutation: gql`
+                            mutation($tema: String!, $pregunta: String!, $rc: String!, $drc: String!, $r1: String!, $dr1: String!, $r2: String!, $dr2: String!)
+                            {
+                                pregunta(tema: $tema, pregunta: $pregunta, rc: $rc, drc: $drc, r1: $r1, dr1: $dr1, r2: $r2, dr2: $dr2)
+                            }
+                        `,
+                        variables: {
+                            tema: this.items,
+                            pregunta: this.form.question,
+                            rc: this.form.correctAns,
+                            drc: this.form.dca,
+                            r1: this.form.answer1,
+                            dr1: this.form.da1,
+                            r2: this.form.answer2,
+                            dr2: this.form.da2
+                        }
+                    })
+                    console.log("Listo");
+                    console.log(data.pregunta)
+                    this.$refs.form.reset();
+                } catch (error) {
+                    console.log(error)
+                }
+            } 
+
         }
     }
 </script>

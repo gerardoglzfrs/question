@@ -23,57 +23,47 @@
                         <v-card flat>
                             <v-card-text>
                                 <v-row class="justify-center mt-6 mb-6">
-                                   <v-row>
-                                        <v-col cols="12" sm="12" md="12" lg="6">
-                                            <v-form  v-model="valid" ref="formQuestion">
-                                                <v-container>
-                                                    <v-row>
-                                                        <v-col cols="12" md="12">
-                                                            <v-select v-model="select" :hint="`${select.topics}`" :items="items" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line >
-                                                            </v-select>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                            <v-text-field v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                            <v-text-field v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
-                                                            <v-text-field v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                            <v-text-field v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
-                                                            <v-text-field v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                            <v-text-field v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
-                                                            <v-text-field v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
-                                                        </v-col>
-                                                        <v-col cols="12" md="12" >
-                                                        <v-row class="justify-center">
-                                                            <v-row align="center" justify="space-around">
-                                                                <v-btn :disabled="!valid" @click="save()" tile color="success" >
-                                                                    <span>
-                                                                        <v-icon left>
-                                                                            save
-                                                                        </v-icon>   
-                                                                    </span>
-                                                                    Guardar
-                                                                </v-btn>
-                                                            </v-row>
+                                    <v-form  v-model="valid" ref="formQuestion">
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12" md="12">
+                                                    <v-select v-model="select" :hint="`${select.topics}`" :items="items" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line ></v-select>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-text-field v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-text-field v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
+                                                    <v-text-field v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-text-field v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
+                                                    <v-text-field v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-text-field v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
+                                                    <v-text-field v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12">
+                                                    <v-select v-model="selectLevel" :hint="`${selectLevel.level}`" :items="items2" item-text="level" item-value="level" label="Select" persistent-hint return-object single-line ></v-select>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-row class="justify-center">
+                                                        <v-row align="center" justify="space-around">
+                                                            <v-btn :disabled="!valid" @click="save()" tile color="success" >
+                                                                <span>
+                                                                    <v-icon left>
+                                                                        save
+                                                                    </v-icon>   
+                                                                </span>
+                                                                Guardar
+                                                            </v-btn>
                                                         </v-row>
-                                                        </v-col>
                                                     </v-row>
-                                                    </v-container>
-                                            </v-form>
-                                        </v-col>
-                                        <v-col cols="12" sm="12" md="12" lg="6" class="blue-grey lighten-5">
-                                            <v-row class="justify-center">
-                                                <h3 style="color: black;" class="mt-3">JSON</h3>
+                                                </v-col>
                                             </v-row>
-                                            <v-row class="justify-center mt-6">
-                                                <p>{{jsonF}}</p>
-                                            </v-row>
-                                        </v-col>
-                                    </v-row>
+                                        </v-container>
+                                    </v-form>
                                 </v-row>
                             </v-card-text>
                         </v-card>
@@ -83,9 +73,43 @@
                 <v-tabs-items v-model="preg">
                     <v-tab-item value="close">
                         <v-card flat>
-                            <v-card-text>
+                             <v-card-text>
                                 <v-row class="justify-center mt-6 mb-6">
-                                    <!-- Faltaaass-->
+                                    <v-form  v-model="validForm" ref="formQuestion2">
+                                        <v-container> 
+                                            <v-row>
+                                                <v-col cols="12" md="12">
+                                                    <v-select v-model="selectForm2" :hint="`${selectForm2.topics}`" :items="itemsForm2" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line ></v-select>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                    <v-text-field v-model="form2.question" :rules="questionRules" label="Pregunta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12">
+                                                    <v-select v-model="selectAns" :hint="`${selectAns.answer}`" :items="items3" item-text="answer" item-value="answer" label="Select" persistent-hint return-object single-line ></v-select>
+                                                </v-col>
+                                                <v-col cols="12" md="12">
+                                                    <v-select v-model="selectLevelForm" :hint="`${selectLevelForm.level}`" :items="itemsForm" item-text="level" item-value="level" label="Select" persistent-hint return-object single-line ></v-select>
+                                                </v-col>
+                                                 <v-col cols="12" md="12" >
+                                                   <v-text-field v-model="form2.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" md="12" >
+                                                <v-row class="justify-center">
+                                                    <v-row align="center" justify="space-around">
+                                                        <v-btn :disabled="!validForm" @click="save2()" tile color="success" >
+                                                            <span>
+                                                                <v-icon left>
+                                                                    save
+                                                                </v-icon>   
+                                                            </span>
+                                                            Guardar
+                                                        </v-btn>
+                                                    </v-row>
+                                                </v-row>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-form>
                                 </v-row>
                             </v-card-text>
                         </v-card>
@@ -102,6 +126,7 @@ import gql from 'graphql-tag'
     export default {
         data:() => ({
             valid: true,
+            validForm: true,
             preg: null,
             jsonF: [],
             form: {
@@ -113,6 +138,10 @@ import gql from 'graphql-tag'
                 answer2: "",
                 da2: ""
             },
+            form2: {
+                question: "",
+                dca: ""
+            },
             questionRules: [
                 v => !!v || 'La pregunta es requerida',
             ],
@@ -123,12 +152,44 @@ import gql from 'graphql-tag'
                 v => !!v || 'La descripción es requerida'
             ],
             
+            /* Temas del primer formulario */
             select: { topics: 'Ortografia' },
             
             items: [
                 { topics: 'Ortografia' },
                 { topics: 'Gramatica' }
             ],
+            /* Temas del segundo formulario */
+            selectForm2: { topics: 'Ortografia' },
+            
+            itemsForm2: [
+                { topics: 'Ortografia' },
+                { topics: 'Gramatica' },
+                { topics: 'Ejemplo' }
+            ],
+
+            selectLevel: { level: 'Bajo' },
+
+            items2: [
+                { level: 'Alto' },
+                { level: 'Medio' },
+                { level: 'Bajo' },
+            ],
+
+            selectLevelForm: { level: 'Bajo' },
+
+            itemsForm: [
+                { level: 'Alto' },
+                { level: 'Medio' },
+                { level: 'Bajo' },
+            ],
+
+            selectAns: { answer: 'Verdadero' },
+
+            items3: [
+                { answer: 'Verdadero' },
+                { answer: 'falso' }
+            ]
         }),
 
         mounted() {
@@ -149,30 +210,53 @@ import gql from 'graphql-tag'
                 try {
                     const {data} = await this.$apollo.mutate({
                         mutation: gql`
-                            mutation($tema: String!, $pregunta: String!, $rc: String!, $drc: String!, $r1: String!, $dr1: String!, $r2: String!, $dr2: String!)
+                            mutation($tema: String!, $pregunta: String!, $rc: String!, $drc: String!, $r1: String!, $dr1: String!, $r2: String!, $dr2: String!, $dificultad: String!)
                             {
-                                pregunta(tema: $tema, pregunta: $pregunta, rc: $rc, drc: $drc, r1: $r1, dr1: $dr1, r2: $r2, dr2: $dr2)
+                                pregunta(tema: $tema, pregunta: $pregunta, rc: $rc, drc: $drc, r1: $r1, dr1: $dr1, r2: $r2, dr2: $dr2, dificultad: $dificultad )
                             }
                         `,
                         variables: {
-                            tema: this.items,
+                            tema: this.select.topics,
                             pregunta: this.form.question,
                             rc: this.form.correctAns,
                             drc: this.form.dca,
                             r1: this.form.answer1,
                             dr1: this.form.da1,
                             r2: this.form.answer2,
-                            dr2: this.form.da2
+                            dr2: this.form.da2,
+                            dificultad: this.selectLevel.level
                         }
                     })
-                    console.log("Listo");
-                    console.log(data.pregunta)
-                    this.$refs.form.reset();
+                    console.log(data);
+                    this.$refs.formQuestion.reset();
                 } catch (error) {
                     console.log(error)
                 }
-            } 
+            },
 
+            async save2() {
+                /* console.log(this.form2.question+ this.form2.dca + this.selectForm2.topics + this.selectAns.answer + this.selectLevelForm.level) */
+               try {
+                    const {data} = await this.$apollo.mutate({
+                    mutation: gql`
+                        mutation($tema: String!, $pregunta: String!, $rc: String!, $dificultad: String!, $descripcion: String!)
+                        {
+                            vf(tema: $tema, pregunta: $pregunta, rc: $rc, dificultad: $dificultad, descripcion: $descripcion)
+                        }
+                    `,
+                    variables: {
+                        tema: this.selectForm2.topics,
+                        pregunta: this.form2.question,
+                        rc: this.selectAns.answer,
+                        dificultad: this.selectLevelForm.level,
+                        descripcion: this.form2.dca
+                    }
+                })
+                    console.log(data);
+               } catch (error) {
+                    console.log(error);
+               }
+            }
         }
     }
 </script>

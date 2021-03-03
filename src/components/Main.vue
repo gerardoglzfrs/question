@@ -167,7 +167,7 @@ import gql from 'graphql-tag'
                 { topics: 'Gramatica' },
                 { topics: 'Ejemplo' }
             ],
-
+            /* Nivel de dificultad formulario uno */
             selectLevel: { level: 'Bajo' },
 
             items2: [

@@ -175,7 +175,7 @@ import gql from 'graphql-tag'
                 { level: 'Medio' },
                 { level: 'Bajo' },
             ],
-
+            /* Nivel de dificultad formulario dos */
             selectLevelForm: { level: 'Bajo' },
 
             itemsForm: [
@@ -183,7 +183,7 @@ import gql from 'graphql-tag'
                 { level: 'Medio' },
                 { level: 'Bajo' },
             ],
-
+            /* Respuesta falso o verdadero */
             selectAns: { answer: 'Verdadero' },
 
             items3: [

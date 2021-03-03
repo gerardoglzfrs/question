@@ -159,6 +159,7 @@ import gql from 'graphql-tag'
                 { topics: 'Ortografia' },
                 { topics: 'Gramatica' }
             ],
+            
             /* Temas del segundo formulario */
             selectForm2: { topics: 'Ortografia' },
             

@@ -27,25 +27,25 @@
                                         <v-container>
                                             <v-row>
                                                 <v-col cols="12" md="12">
-                                                    <v-select v-model="select" :hint="`${select.topics}`" :items="items" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line ></v-select>
+                                                    <v-select v-model="form.topics" :rules="selectTopics" :items="topics" label="Tema" ></v-select>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
+                                                    <v-text-field ref="f1i1" v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
-                                                    <v-text-field v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
+                                                    <v-text-field ref="f1i2" v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
+                                                    <v-text-field ref="f1i3" v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
-                                                    <v-text-field v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                    <v-text-field ref="f1i4" v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
+                                                    <v-text-field ref="f1i5" v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
-                                                    <v-text-field v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                    <v-text-field ref="f1i6" v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
+                                                    <v-text-field ref="f1i7" v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12">
-                                                    <v-select v-model="selectLevel" :hint="`${selectLevel.level}`" :items="items2" item-text="level" item-value="level" label="Select" persistent-hint return-object single-line ></v-select>
+                                                    <v-select v-model="form.levels" :rules="selectLev" :items="levels" label="Nivel" ></v-select>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
                                                     <v-row class="justify-center">
@@ -79,16 +79,16 @@
                                         <v-container> 
                                             <v-row>
                                                 <v-col cols="12" md="12">
-                                                    <v-select v-model="selectForm2" :hint="`${selectForm2.topics}`" :items="itemsForm2" item-text="topics" item-value="topics" label="Select" persistent-hint return-object single-line ></v-select>
+                                                    <v-select v-model="form2.topics" :rules="selectTopics2" :items="topics2" label="Tema" ></v-select>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
                                                     <v-text-field v-model="form2.question" :rules="questionRules" label="Pregunta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12">
-                                                    <v-select v-model="selectAns" :hint="`${selectAns.answer}`" :items="items3" item-text="answer" item-value="answer" label="Select" persistent-hint return-object single-line ></v-select>
+                                                    <v-select v-model="form2.answe" :rules="answerRul" :items="answer" label="Respuesta" ></v-select>
                                                 </v-col>
                                                 <v-col cols="12" md="12">
-                                                    <v-select v-model="selectLevelForm" :hint="`${selectLevelForm.level}`" :items="itemsForm" item-text="level" item-value="level" label="Select" persistent-hint return-object single-line ></v-select>
+                                                    <v-select v-model="form2.levels" :rules="levelsRul" :items="levels2" label="Nivel" ></v-select>
                                                 </v-col>
                                                  <v-col cols="12" md="12" >
                                                    <v-text-field v-model="form2.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
@@ -130,16 +130,21 @@ import gql from 'graphql-tag'
             preg: null,
             jsonF: [],
             form: {
+                topics: "",
                 question: "",
                 correctAns: "",
                 dca: "",
                 answer1: "",
                 da1: "",
                 answer2: "",
-                da2: ""
+                da2: "",
+                levels: ""
             },
             form2: {
+                topics: '',
                 question: "",
+                answer: '',
+                levels: '',
                 dca: ""
             },
             questionRules: [
@@ -151,46 +156,56 @@ import gql from 'graphql-tag'
             description: [
                 v => !!v || 'La descripción es requerida'
             ],
+            selectLev: [
+                v => !!v || 'Seleccione el nivel'
+            ],
+            selectTopics: [
+                v => !!v || 'Seleccione el tema'
+            ],
+            selectTopics2: [
+                v => !!v || 'Seleccione el tema'
+            ],
+            answerRul: [
+                v => !!v || 'La respuesta es requerida'
+            ],
+            levelsRul: [
+                v => !!v || 'El nivel es requerido'
+            ],
             
             /* Temas del primer formulario */
-            select: { topics: 'Ortografia' },
-            
-            items: [
-                { topics: 'Ortografia' },
-                { topics: 'Gramatica' }
+           topics: [
+               'Ortografia',
+               'Gramatica',
+               'Ejemplo1',
+               'Ejemplo2'
+           ],
+           
+            /* Niveles del primer formulario */
+            levels: [
+                'Alto',
+                'Medio',
+                'Bajo'
             ],
             
             /* Temas del segundo formulario */
-            selectForm2: { topics: 'Ortografia' },
-            
-            itemsForm2: [
-                { topics: 'Ortografia' },
-                { topics: 'Gramatica' },
-                { topics: 'Ejemplo' }
+            topics2: [
+               'Ortografia',
+               'Gramatica',
+               'Ejemplo1',
+               'Ejemplo2'
             ],
             /* Nivel de dificultad formulario uno */
-            selectLevel: { level: 'Bajo' },
-
-            items2: [
-                { level: 'Alto' },
-                { level: 'Medio' },
-                { level: 'Bajo' },
+            levels2: [
+                'Alto',
+                'Medio',
+                'Bajo'
             ],
-            /* Nivel de dificultad formulario dos */
-            selectLevelForm: { level: 'Bajo' },
-
-            itemsForm: [
-                { level: 'Alto' },
-                { level: 'Medio' },
-                { level: 'Bajo' },
-            ],
-            /* Respuesta falso o verdadero */
-            selectAns: { answer: 'Verdadero' },
-
-            items3: [
-                { answer: 'Verdadero' },
-                { answer: 'falso' }
+            /* Respuesta verdadero o falso */
+            answer: [
+                'Verdadero',
+                'Falso'
             ]
+
         }),
 
         mounted() {
@@ -217,7 +232,7 @@ import gql from 'graphql-tag'
                             }
                         `,
                         variables: {
-                            tema: this.select.topics,
+                            tema: this.form.topics,
                             pregunta: this.form.question,
                             rc: this.form.correctAns,
                             drc: this.form.dca,
@@ -225,11 +240,12 @@ import gql from 'graphql-tag'
                             dr1: this.form.da1,
                             r2: this.form.answer2,
                             dr2: this.form.da2,
-                            dificultad: this.selectLevel.level
+                            dificultad: this.form.levels
                         }
                     })
-                    console.log(data);
                     this.$refs.formQuestion.reset();
+                    console.log("listo");
+                    console.log(data);
                 } catch (error) {
                     console.log(error)
                 }
@@ -246,13 +262,15 @@ import gql from 'graphql-tag'
                         }
                     `,
                     variables: {
-                        tema: this.selectForm2.topics,
+                        tema: this.form2.topics,
                         pregunta: this.form2.question,
-                        rc: this.selectAns.answer,
-                        dificultad: this.selectLevelForm.level,
+                        rc: this.form2.answer,
+                        dificultad: this.form2.levels,
                         descripcion: this.form2.dca
                     }
                 })
+                    this.$refs.formQuestion2.reset();
+                    console.log("listo");
                     console.log(data);
                } catch (error) {
                     console.log(error);

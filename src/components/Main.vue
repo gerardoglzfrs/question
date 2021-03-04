@@ -30,19 +30,19 @@
                                                     <v-select v-model="form.topics" :rules="selectTopics" :items="topics" label="Tema" ></v-select>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field ref="f1i1" v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
+                                                    <v-text-field v-model="form.question" :rules="questionRules" label="Pregunta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field ref="f1i2" v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
-                                                    <v-text-field ref="f1i3" v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
+                                                    <v-text-field v-model="form.correctAns" :rules="answerRules" label="Respuesta correcta" required></v-text-field>
+                                                    <v-text-field v-model="form.dca" :rules="description" label="Descripción de respuesta correcta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field ref="f1i4" v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
-                                                    <v-text-field ref="f1i5" v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                    <v-text-field v-model="form.answer1" :rules="answerRules" label="Respuesta 1" required></v-text-field>
+                                                    <v-text-field v-model="form.da1" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12" >
-                                                    <v-text-field ref="f1i6" v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
-                                                    <v-text-field ref="f1i7" v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
+                                                    <v-text-field v-model="form.answer2" :rules="answerRules" label="Respuesta 2" required></v-text-field>
+                                                    <v-text-field v-model="form.da2" :rules="description" label="Descripción de respuesta" required></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" md="12">
                                                     <v-select v-model="form.levels" :rules="selectLev" :items="levels" label="Nivel" ></v-select>
